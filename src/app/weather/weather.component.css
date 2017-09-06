@@ -1,0 +1,22 @@
+.weather-result {
+    margin: auto;
+    width: 25%;
+}
+.weather-result .left-pane {
+    width: 50%;
+    min-height: 100px;
+    float: left;
+}
+.weather-result .right-pane {
+    width:50%;
+    min-height: 100px;
+    float:left;
+}
+.weather-result:after {
+    clear: both;
+    display: table;
+}
+td {
+    min-width: 75px;
+    text-align: center;
+}
