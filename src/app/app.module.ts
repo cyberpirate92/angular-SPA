@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { WeatherComponent } from './weather/weather.component';
 import { CurrencyComponent } from './currency/currency.component';
 import { WeatherService } from './weather/weather.service';
+import { CurrencyService } from './currency/currency.service';
 
 const appRoutes: Routes = [
   {path: 'weather', component: WeatherComponent},
@@ -26,7 +27,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule
   ],
-  providers: [WeatherService],
+  providers: [WeatherService, CurrencyService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

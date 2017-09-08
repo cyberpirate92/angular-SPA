@@ -1,3 +1,22 @@
-<p>
-  currency works!
-</p>
+<div class='row'>
+  <form (submit)="getExchange()">
+    <div class="form-group">
+      <label for="amount">Amount</label>
+      <input type="text" name="amount" [(ngModel)]="amount">
+    </div>
+    <div class="form-group">
+      <label for="base">From</label>
+      <input type="text" name="base" [(ngModel)]="model.base" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="target">To</label>
+      <input type="text" name="target" [(ngModel)]="model.target" class="form-control">
+    </div>
+    <button type="submit"> Go </button>
+  </form>
+  <div class="result">
+    <div class="alert alert-warning">
+      {{amount | currency}} {{model.base | uppercase}} = {{amount * model.exchangeRate}} {{model.target}}
+    </div>
+  </div>
+</div>
