@@ -13,7 +13,8 @@ export class WeatherService {
     public getWeather(city: string): Observable<any> {
         this.totalRequests++;
         console.log('[' + this.totalRequests + '] Service getWeather(' + city + ') invoked');
-        return this._http.get(this.weatherURL1 + city + this.weatherURL2)
-        .map(res => res.json());
+        const x: any = this._http.get(this.weatherURL1 + city + this.weatherURL2);
+        console.dir(x);
+        return x.map(res => res.json());
     }
 }

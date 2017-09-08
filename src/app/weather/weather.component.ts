@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChange, SimpleChanges, Input } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {WeatherModel} from './weather-model';
 import { WeatherService } from './weather.service';
@@ -13,6 +13,7 @@ export class WeatherComponent {
   constructor(private _service: WeatherService) { }
   public response: any = null;
   public city = 'Mumbai';
+  @Input()
   public tempScale = 'kelvin';
   public countryFlagURL: string = null;
   public requestComplete = true;
@@ -34,6 +35,7 @@ export class WeatherComponent {
     if (from === to) {
       return value;
     }
+    console.log('From: ' + from + ' To: ' + to);
     let cFrom: number;
     // converting to celcius
     if (from === 'C' || from === 'celcius' || from === 'c' ) {
@@ -45,17 +47,17 @@ export class WeatherComponent {
     }
     // converting to requested scale from celcius (cFrom)
     if (to === 'C' || to === 'celcius' || to === 'c' ) {
-      return Math.ceil(cFrom);
+      return parseFloat(cFrom.toFixed(2));
     } else if (to === 'F' || to === 'farenheit' || to === 'f') {
-      return Math.ceil((cFrom * 9 / 5) + 32);
+      return parseFloat(((cFrom * 9 / 5) + 32).toFixed(2));
     } else {
-      return Math.ceil(cFrom + 273.15);
+      return parseFloat((cFrom + 273.15).toFixed(2));
     }
   }
   public defaultConversion(): void {
     // API returns temperature in Kelvin
     // If a different scale is selected, wil be updated
-    this.updateTempScale('K');
+    this.updateTemp('kelvin', this.tempScale);
   }
   public updateCountryFlagURL(): void {
     if (this.response != null && this.response.hasOwnProperty('sys') && this.response.sys.hasOwnProperty('country')) {
@@ -66,8 +68,12 @@ export class WeatherComponent {
     }
     this.countryFlagURL = null;
   }
-  public updateTempScale(newScale: string) { // , newScale: string): void {
-    const oldScale = this.tempScale;
+  public updateTempScale(newScale: string) { // newScale - $event containing the new selection
+    console.log('Updating scales - event');
+    this.updateTemp(this.tempScale, newScale);
+    this.tempScale = newScale;
+  }
+  public updateTemp(oldScale: string, newScale: string) {  // newScale - Which scale to convert to
     console.log('Prev: ' + oldScale);
     console.log('Curr: ' + newScale);
     this.response.main.temp = this.convert(oldScale, newScale, this.response.main.temp);

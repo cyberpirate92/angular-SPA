@@ -6,9 +6,9 @@
   <div>
     <div>
       <form>
-        <input type="radio" name="temp-scale" value="kelvin" (ngModelChange)="updateTempScale($event)" [(ngModel)]="tempScale"> Kelvin
-        <input type="radio" name="temp-scale" value="celcius" (ngModelChange)="updateTempScale($event)" [(ngModel)]="tempScale"> Celcius
-        <input type="radio" name="temp-scale" value="farenheit" (ngModelChange)="updateTempScale($event)" [(ngModel)]="tempScale"> Farenheit
+        <input type="radio" name="temp-scale" value="kelvin" [ngModel]="tempScale" (ngModelChange)="updateTempScale($event)"> Kelvin
+        <input type="radio" name="temp-scale" value="celcius" [ngModel]="tempScale" (ngModelChange)="updateTempScale($event)"> Celcius
+        <input type="radio" name="temp-scale" value="farenheit" [ngModel]="tempScale" (ngModelChange)="updateTempScale($event)"> Farenheit
       </form>
     </div>
     <div class="weather-result" *ngIf="response">
@@ -40,6 +40,6 @@
         </table>
       </div>
     </div>
-    <!--<pre>{{ this | json }}</pre>-->
+    <pre>{{ this | json }}</pre>
   </div>
 </div>
